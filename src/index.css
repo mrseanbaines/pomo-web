@@ -1,5 +1,28 @@
+/* Global styles */
+
+@font-face {
+  font-family: 'arciform';
+  src: url('./assets/fonts/arciform.eot');
+  src: url('./assets/fonts/arciform.eot?#iefix') format('embedded-opentype'),
+       url('./assets/fonts/arciform.woff2') format('woff2'),
+       url('./assets/fonts/arciform.woff') format('woff'),
+       url('./assets/fonts/arciform.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  font-family: 'arciform';
+}
+
+html,
+body,
+#root {
+  display: flex;
+  flex: 1;
 }
