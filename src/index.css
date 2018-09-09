@@ -13,11 +13,13 @@
 
 html {
   height: 100%;
+  color: #fff;
+
 }
 
 body {
-  margin: 0;
   font-family: 'arciform';
+  background: #ff6b81;
 }
 
 html,
@@ -25,4 +27,27 @@ body,
 #root {
   display: flex;
   flex: 1;
+}
+
+h1,
+h2,
+h3,
+h6 {
+  text-transform: lowercase;
+}
+
+h1 {
+  font-size: 72px;
+}
+
+h2 {
+  font-size: 48px;
+}
+
+h3 {
+  font-size: 36px;
+}
+
+h6 {
+  font-size: 20px;
 }

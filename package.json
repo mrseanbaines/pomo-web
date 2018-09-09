@@ -84,12 +84,11 @@
       "mjs"
     ]
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "babel-plugin-root-import": "^6.1.0",
+    "babel-plugin-styled-components": "^1.6.4"
   }
 }
