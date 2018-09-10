@@ -152,12 +152,12 @@ class Timer extends Component {
           />
         </SVG>
 
-        <TimerContents>
-          <H6 onClick={this.stopTimer}>Cancel</H6>
-          <h2>
+        <TimerContents id="timer-label">
+          <H6 id="reset" onClick={this.stopTimer}>Cancel</H6>
+          <h2 id="time-left">
             {date.toLocaleTimeString('en', { minute: '2-digit', second: '2-digit' })}
           </h2>
-          <H6 onClick={this.toggleTimer}>{timerActive ? 'Pause' : 'Start'}</H6>
+          <H6 id="start_stop" onClick={this.toggleTimer}>{timerActive ? 'Pause' : 'Start'}</H6>
         </TimerContents>
       </TimerWrapper>
     );

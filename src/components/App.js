@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Timer from '~/src/components/Timer';
+import Controls from '~/src/components/Controls';
 
 const AppWrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   padding: 30px;
   max-width: 375px;
@@ -25,6 +26,8 @@ class App extends Component {
         <h1>pomo</h1>
         <Slogan>The handy pomodoro timer</Slogan>
         <Timer />
+        <Controls label="break" initialLength={5} />
+        <Controls label="session" initialLength={25} />
       </AppWrapper>
     );
   }
