@@ -47,12 +47,12 @@ class Timer extends Component {
       lineLength: null,
     };
 
-    this.tick = this.tick.bind(this);
-    this.toggleTimer = this.toggleTimer.bind(this);
-    this.stopTimer = this.stopTimer.bind(this);
     this.handleResize = this.handleResize.bind(this);
-    this.circle = React.createRef();
     this.update = this.update.bind(this);
+    this.toggleTimer = this.toggleTimer.bind(this);
+    this.tick = this.tick.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
+    this.circle = React.createRef();
   }
 
   componentWillMount() {
@@ -76,20 +76,19 @@ class Timer extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  update() {
+  handleResize() {
+    this.setState({
+      lineLength: this.circle.current.getTotalLength()
+    });
+  }
 
+  update() {
     const { date } = this.state;
     const { sessionLength } = this.props;
 
     date.setMinutes(sessionLength, 0)
 
     this.setState({ date });
-  }
-
-  handleResize() {
-    this.setState({
-      lineLength: this.circle.current.getTotalLength()
-    });
   }
 
   toggleTimer() {
@@ -106,6 +105,16 @@ class Timer extends Component {
     }));
   }
 
+  tick() {
+    const { date } = this.state;
+
+    if (date.getSeconds() === 0 && date.getMinutes() === 0) return;
+
+    date.setSeconds(date.getSeconds() - 1)
+
+    this.setState({ date });
+  }
+
   stopTimer() {
     const { date } = this.state;
     const { sessionLength } = this.props;
@@ -117,16 +126,8 @@ class Timer extends Component {
     this.setState({
       timerActive: false,
     });
-  }
 
-  tick() {
-    const { date } = this.state;
-
-    if (date.getSeconds() === 0 && date.getMinutes() === 0) return;
-
-    date.setSeconds(date.getSeconds() - 1)
-
-    this.setState({ date });
+    this.props.reset();
   }
 
   render() {

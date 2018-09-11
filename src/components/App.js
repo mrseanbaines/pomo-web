@@ -34,6 +34,7 @@ class App extends Component {
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   increment(key) {
@@ -68,7 +69,7 @@ class App extends Component {
       <AppWrapper>
         <h1>pomo</h1>
         <Slogan>The handy pomodoro timer</Slogan>
-        <Timer {...this.state} />
+        <Timer {...this.state} reset={this.reset} />
         <Controls
           increment={this.increment}
           decrement={this.decrement}
