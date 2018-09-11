@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const H6 = styled.h6`
@@ -23,15 +23,25 @@ const ControlsWrapperInner = styled.div`
 
 class Controls extends Component {
   render() {
-    const { label, initialLength } = this.props;
+    const { label, length } = this.props;
 
     return (
       <ControlsWrapper>
         <H6 id={`${label}-label`}>{label} length</H6>
         <ControlsWrapperInner>
-          <H3 id={`${label}-length`}>{initialLength}</H3>
-          <div id={`${label}-decrement`}>-</div>
-          <div id={`${label}-increment`}>+</div>
+          <H3 id={`${label}-length`}>{length}</H3>
+          <div
+            id={`${label}-decrement`}
+            onClick={() => this.props.decrement(`${label}Length`)}
+          >
+            -
+          </div>
+          <div
+            id={`${label}-increment`}
+            onClick={() => this.props.increment(`${label}Length`)}
+          >
+            +
+          </div>
         </ControlsWrapperInner>
       </ControlsWrapper>
     );

@@ -41,8 +41,7 @@ class Timer extends Component {
     super(props);
 
     this.state = {
-      breakLength: 5,
-      sessionLength: 25,
+      breakLength: this.props.breakLength,
       timerActive: false,
       date: new Date(),
       lineLength: null,
@@ -53,16 +52,19 @@ class Timer extends Component {
     this.stopTimer = this.stopTimer.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.circle = React.createRef();
+    this.update = this.update.bind(this);
   }
 
   componentWillMount() {
-    const { date, sessionLength } = this.state;
-
-    date.setMinutes(sessionLength, 0)
-
-    this.setState({ date });
+    this.update();
 
     window.addEventListener('resize', this.handleResize);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.sessionLength !== this.props.sessionLength) {
+      this.update();
+    }
   }
 
   componentDidMount() {
@@ -72,6 +74,16 @@ class Timer extends Component {
   componentWillUnmount() {
     clearInterval(this.timerId);
     window.removeEventListener('resize', this.handleResize);
+  }
+
+  update() {
+
+    const { date } = this.state;
+    const { sessionLength } = this.props;
+
+    date.setMinutes(sessionLength, 0)
+
+    this.setState({ date });
   }
 
   handleResize() {
@@ -95,7 +107,8 @@ class Timer extends Component {
   }
 
   stopTimer() {
-    const { date, sessionLength } = this.state;
+    const { date } = this.state;
+    const { sessionLength } = this.props;
 
     clearInterval(this.timerId);
 
@@ -117,10 +130,11 @@ class Timer extends Component {
   }
 
   render() {
-    const { lineLength, timerActive, sessionLength, date } = this.state;
+    const { lineLength, timerActive, date } = this.state;
+    const { sessionLength } = this.props;
     const sessionSeconds = sessionLength * 60;
     const date2 = new Date();
-    date2.setMinutes(25, 0);
+    date2.setMinutes(sessionLength, 0);
     const secondsRemaining = sessionSeconds - parseInt((date2 - date) / 1000, 10);
 
     return (
@@ -153,7 +167,7 @@ class Timer extends Component {
         </SVG>
 
         <TimerContents id="timer-label">
-          <H6 id="reset" onClick={this.stopTimer}>Cancel</H6>
+          <H6 id="reset" onClick={this.stopTimer}>Reset</H6>
           <h2 id="time-left">
             {date.toLocaleTimeString('en', { minute: '2-digit', second: '2-digit' })}
           </h2>
