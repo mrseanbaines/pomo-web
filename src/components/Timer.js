@@ -60,7 +60,9 @@ class Timer extends Component {
     this.toggleTimer = this.toggleTimer.bind(this);
     this.tick = this.tick.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
+    this.alarm = this.alarm.bind(this);
     this.circle = React.createRef();
+    this.alert = React.createRef();
   }
 
   componentWillMount() {
@@ -103,7 +105,7 @@ class Timer extends Component {
     const { timerActive } = this.state;
 
     if (!timerActive) {
-      this.timerId = setInterval(() => this.tick(), 1000);
+      this.timerId = setInterval(() => this.tick(), 500);
     } else {
       clearInterval(this.timerId);
     }
@@ -113,15 +115,22 @@ class Timer extends Component {
     }));
   }
 
+  alarm() {
+    this.alert.current.currentTime = 0;
+    this.alert.current.play();
+  }
+
   tick() {
     const { date } = this.state;
 
     if (date.getSeconds() === 0 && date.getMinutes() === 0) {
       this.props.toggleActive();
       this.update();
+      this.alarm();
+      return;
     };
 
-    date.setSeconds(date.getSeconds() - 1)
+    date.setSeconds(date.getSeconds() - 1);
 
     this.setState({ date });
   }
@@ -138,6 +147,8 @@ class Timer extends Component {
       timerActive: false,
     });
 
+    this.alert.current.pause();
+    this.alert.current.currentTime = 0;
     this.props.reset();
   }
 
@@ -188,6 +199,7 @@ class Timer extends Component {
           <H6 id="start_stop" onClick={this.toggleTimer}>{timerActive ? 'Pause' : 'Start'}</H6>
           </Inline>
         </TimerContents>
+        <audio ref={this.alert} id="beep" src="sounds/alert.wav"></audio>
       </TimerWrapper>
     );
   }
