@@ -36,13 +36,21 @@ const TimerContents = styled.div`
   position: absolute;
 `
 
+const Inline = styled.div`
+  ${H6} {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+`
+
 class Timer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      breakLength: this.props.breakLength,
       timerActive: false,
+      currentActive: this.props.sessionLabel,
       date: new Date(),
       lineLength: null,
     };
@@ -62,7 +70,7 @@ class Timer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.sessionLength !== this.props.sessionLength) {
+    if (prevProps.time !== this.props.time) {
       this.update();
     }
   }
@@ -84,9 +92,9 @@ class Timer extends Component {
 
   update() {
     const { date } = this.state;
-    const { sessionLength } = this.props;
+    const { time } = this.props;
 
-    date.setMinutes(sessionLength, 0)
+    date.setMinutes(time, 0);
 
     this.setState({ date });
   }
@@ -108,7 +116,10 @@ class Timer extends Component {
   tick() {
     const { date } = this.state;
 
-    if (date.getSeconds() === 0 && date.getMinutes() === 0) return;
+    if (date.getSeconds() === 0 && date.getMinutes() === 0) {
+      this.props.toggleActive();
+      this.update();
+    };
 
     date.setSeconds(date.getSeconds() - 1)
 
@@ -117,11 +128,11 @@ class Timer extends Component {
 
   stopTimer() {
     const { date } = this.state;
-    const { sessionLength } = this.props;
+    const { time } = this.props;
 
     clearInterval(this.timerId);
 
-    date.setMinutes(sessionLength, 0);
+    date.setMinutes(time, 0);
 
     this.setState({
       timerActive: false,
@@ -132,10 +143,10 @@ class Timer extends Component {
 
   render() {
     const { lineLength, timerActive, date } = this.state;
-    const { sessionLength } = this.props;
-    const sessionSeconds = sessionLength * 60;
+    const { time } = this.props;
+    const sessionSeconds = time * 60;
     const date2 = new Date();
-    date2.setMinutes(sessionLength, 0);
+    date2.setMinutes(time, 0);
     const secondsRemaining = sessionSeconds - parseInt((date2 - date) / 1000, 10);
 
     return (
@@ -167,12 +178,15 @@ class Timer extends Component {
           />
         </SVG>
 
-        <TimerContents id="timer-label">
-          <H6 id="reset" onClick={this.stopTimer}>Reset</H6>
+        <TimerContents>
+          <H6 id="timer-label">{this.props.currentActive}</H6>
           <h2 id="time-left">
             {date.toLocaleTimeString('en', { minute: '2-digit', second: '2-digit' })}
           </h2>
+          <Inline>
+          <H6 id="reset" onClick={this.stopTimer}>Reset</H6>
           <H6 id="start_stop" onClick={this.toggleTimer}>{timerActive ? 'Pause' : 'Start'}</H6>
+          </Inline>
         </TimerContents>
       </TimerWrapper>
     );
