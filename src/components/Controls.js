@@ -11,6 +11,13 @@ const H3 = styled.h3`
   }
 `
 
+const ControlIcon = styled.div`
+  font-size: 50px;
+  line-height: 0.5;
+  cursor: pointer;
+  user-select: none;
+`
+
 const ControlsWrapper = styled.div`
   width: 100%;
 `
@@ -30,18 +37,18 @@ class Controls extends Component {
         <H6 id={`${label}-label`}>{label} length</H6>
         <ControlsWrapperInner>
           <H3 id={`${label}-length`}>{length}</H3>
-          <div
+          <ControlIcon
             id={`${label}-decrement`}
             onClick={() => this.props.decrement(`${label}Length`)}
           >
             -
-          </div>
-          <div
+          </ControlIcon>
+          <ControlIcon
             id={`${label}-increment`}
             onClick={() => this.props.increment(`${label}Length`)}
           >
             +
-          </div>
+          </ControlIcon>
         </ControlsWrapperInner>
       </ControlsWrapper>
     );

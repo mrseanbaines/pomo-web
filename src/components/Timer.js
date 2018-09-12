@@ -21,9 +21,13 @@ const TimerWrapper = styled.div`
   padding-bottom: 100%;
 `
 
-const H6 = styled.h6`
+const TimerControl = styled.h6`
   cursor: pointer;
   user-select: none;
+`
+
+const H6 = styled.h6`
+  opacity: 0.5;
 `
 
 const TimerContents = styled.div`
@@ -37,7 +41,7 @@ const TimerContents = styled.div`
 `
 
 const Inline = styled.div`
-  ${H6} {
+  ${TimerControl} {
     display: inline-block;
     margin-left: 10px;
     margin-right: 10px;
@@ -105,7 +109,7 @@ class Timer extends Component {
     const { timerActive } = this.state;
 
     if (!timerActive) {
-      this.timerId = setInterval(() => this.tick(), 500);
+      this.timerId = setInterval(() => this.tick(), 1000);
     } else {
       clearInterval(this.timerId);
     }
@@ -190,13 +194,20 @@ class Timer extends Component {
         </SVG>
 
         <TimerContents>
-          <H6 id="timer-label">{this.props.currentActive}</H6>
+          <H6 transparent id="timer-label">{this.props.currentActive}</H6>
           <h2 id="time-left">
-            {date.toLocaleTimeString('en', { minute: '2-digit', second: '2-digit' })}
+            {date.toLocaleTimeString('en', {
+              minute: '2-digit',
+              second: '2-digit',
+            })}
           </h2>
           <Inline>
-          <H6 id="reset" onClick={this.stopTimer}>Reset</H6>
-          <H6 id="start_stop" onClick={this.toggleTimer}>{timerActive ? 'Pause' : 'Start'}</H6>
+            <TimerControl id="reset" onClick={this.stopTimer}>
+              Reset
+            </TimerControl>
+            <TimerControl id="start_stop" onClick={this.toggleTimer}>
+              {timerActive ? 'Pause' : 'Start'}
+            </TimerControl>
           </Inline>
         </TimerContents>
         <audio ref={this.alert} id="beep" src="sounds/alert.wav"></audio>
