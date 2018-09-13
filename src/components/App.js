@@ -10,7 +10,9 @@ const AppWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 30px 30px;
+  width: 100%;
   max-width: 345px;
+  height: 100%;
   max-height: 667px;
   margin: 0 auto;
 `
