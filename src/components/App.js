@@ -9,8 +9,9 @@ const AppWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
-  max-width: 375px;
+  padding: 0 30px 30px;
+  max-width: 345px;
+  max-height: 667px;
   margin: 0 auto;
 `
 

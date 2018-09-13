@@ -56,7 +56,7 @@ class Timer extends Component {
       timerActive: false,
       currentActive: this.props.sessionLabel,
       date: new Date(),
-      lineLength: null,
+      lineLength: 1000,
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -75,7 +75,7 @@ class Timer extends Component {
     window.addEventListener('resize', this.handleResize);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.time !== this.props.time) {
       this.update();
     }
@@ -91,8 +91,12 @@ class Timer extends Component {
   }
 
   handleResize() {
-    this.setState({
-      lineLength: this.circle.current.getTotalLength()
+    setTimeout(() => {
+      const radius = this.circle.current.r.baseVal.value;
+      const circumference = 2 * radius * Math.PI;
+      this.setState({
+        lineLength: circumference
+      });
     });
   }
 
@@ -177,6 +181,7 @@ class Timer extends Component {
             strokeDasharray="10"
             opacity="0.4"
             ref={this.circle}
+            id="circle"
           />
 
           <circle

@@ -16,6 +16,7 @@ const ControlIcon = styled.div`
   line-height: 0.5;
   cursor: pointer;
   user-select: none;
+  touch-action: manipulation;
 `
 
 const ControlsWrapper = styled.div`

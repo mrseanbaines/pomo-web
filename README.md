@@ -1,5 +1,5 @@
 # Pomo Web
-A pomodoro clock built using React, Styled Components & Grid Styled
+A pomodoro clock built using React & Styled Components
 
 ## Setup
 Make sure you have [Node](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed.
