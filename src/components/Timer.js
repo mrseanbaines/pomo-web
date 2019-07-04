@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 
 const SVG = styled.svg`
   width: 100%;
@@ -8,27 +8,28 @@ const SVG = styled.svg`
   top: 0;
   left: 0;
   z-index: -1;
+  overflow: visible;
 
   .progress {
     transform: rotate(-90deg);
     transform-origin: center;
   }
-`
+`;
 
 const TimerWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-bottom: 100%;
-`
+`;
 
 const TimerControl = styled.h6`
   cursor: pointer;
   user-select: none;
-`
+`;
 
 const H6 = styled.h6`
   opacity: 0.5;
-`
+`;
 
 const TimerContents = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ const TimerContents = styled.div`
   height: 100%;
   width: 100%;
   position: absolute;
-`
+`;
 
 const Inline = styled.div`
   ${TimerControl} {
@@ -46,7 +47,7 @@ const Inline = styled.div`
     margin-left: 10px;
     margin-right: 10px;
   }
-`
+`;
 
 class Timer extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class Timer extends Component {
       timerActive: false,
       currentActive: this.props.sessionLabel,
       date: new Date(),
-      lineLength: 1000,
+      lineLength: 1000
     };
 
     this.handleResize = this.handleResize.bind(this);
@@ -72,7 +73,7 @@ class Timer extends Component {
   componentWillMount() {
     this.update();
 
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -87,7 +88,7 @@ class Timer extends Component {
 
   componentWillUnmount() {
     clearInterval(this.timerId);
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener("resize", this.handleResize);
   }
 
   handleResize() {
@@ -119,7 +120,7 @@ class Timer extends Component {
     }
 
     this.setState(prevState => ({
-      timerActive: !prevState.timerActive,
+      timerActive: !prevState.timerActive
     }));
   }
 
@@ -136,7 +137,7 @@ class Timer extends Component {
       this.update();
       this.alarm();
       return;
-    };
+    }
 
     date.setSeconds(date.getSeconds() - 1);
 
@@ -152,7 +153,7 @@ class Timer extends Component {
     date.setMinutes(time, 0);
 
     this.setState({
-      timerActive: false,
+      timerActive: false
     });
 
     this.alert.current.pause();
@@ -166,7 +167,8 @@ class Timer extends Component {
     const sessionSeconds = time * 60;
     const date2 = new Date();
     date2.setMinutes(time, 0);
-    const secondsRemaining = sessionSeconds - parseInt((date2 - date) / 1000, 10);
+    const secondsRemaining =
+      sessionSeconds - parseInt((date2 - date) / 1000, 10);
 
     return (
       <TimerWrapper>
@@ -174,7 +176,7 @@ class Timer extends Component {
           <circle
             cx="50%"
             cy="50%"
-            r="calc(50% - 5px)"
+            r="50%"
             stroke="#fff"
             strokeWidth="2px"
             fill="none"
@@ -183,27 +185,31 @@ class Timer extends Component {
             ref={this.circle}
             id="circle"
           />
+        </SVG>
 
+        <SVG>
           <circle
             className="progress"
             cx="50%"
             cy="50%"
-            r="calc(50% - 5px)"
+            r="50%"
             stroke="#a1f0ba"
             strokeWidth="10px"
             fill="none"
             strokeDasharray={lineLength}
-            strokeDashoffset={lineLength / sessionSeconds * secondsRemaining}
+            strokeDashoffset={(lineLength / sessionSeconds) * secondsRemaining}
             strokeLinecap="round"
           />
         </SVG>
 
         <TimerContents>
-          <H6 transparent id="timer-label">{this.props.currentActive}</H6>
+          <H6 transparent id="timer-label">
+            {this.props.currentActive}
+          </H6>
           <h2 id="time-left">
-            {date.toLocaleTimeString('en', {
-              minute: '2-digit',
-              second: '2-digit',
+            {date.toLocaleTimeString("en", {
+              minute: "2-digit",
+              second: "2-digit"
             })}
           </h2>
           <Inline>
@@ -211,11 +217,11 @@ class Timer extends Component {
               Reset
             </TimerControl>
             <TimerControl id="start_stop" onClick={this.toggleTimer}>
-              {timerActive ? 'Pause' : 'Start'}
+              {timerActive ? "Pause" : "Start"}
             </TimerControl>
           </Inline>
         </TimerContents>
-        <audio ref={this.alert} id="beep" src="sounds/alert.wav"></audio>
+        <audio ref={this.alert} id="beep" src="sounds/alert.wav" />
       </TimerWrapper>
     );
   }
