@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Timer from '~/src/components/Timer';
-import Controls from '~/src/components/Controls';
+import React, { Component } from "react";
+import styled from "styled-components";
+import Timer from "~/src/components/Timer";
+import Controls from "~/src/components/Controls";
 
 const AppWrapper = styled.div`
   display: flex;
@@ -15,19 +15,19 @@ const AppWrapper = styled.div`
   height: 100%;
   max-height: 667px;
   margin: 0 auto;
-`
+`;
 
 const Slogan = styled.h6`
   opacity: 0.4;
   text-align: center;
-`
+`;
 
 const initialState = {
-  breakLabel: 'break',
+  breakLabel: "break",
   breakLength: 5,
-  sessionLabel: 'session',
+  sessionLabel: "session",
   sessionLength: 25,
-  currentActive: 'session',
+  currentActive: "session"
 };
 
 class App extends Component {
@@ -65,9 +65,9 @@ class App extends Component {
   toggleActive() {
     const { breakLabel, sessionLabel } = this.state;
 
-    this.setState(({currentActive}) => ({
-      currentActive: currentActive === 'session' ? breakLabel : sessionLabel
-    }))
+    this.setState(({ currentActive }) => ({
+      currentActive: currentActive === "session" ? breakLabel : sessionLabel
+    }));
   }
 
   render() {
@@ -76,7 +76,7 @@ class App extends Component {
       breakLength,
       sessionLabel,
       sessionLength,
-      currentActive,
+      currentActive
     } = this.state;
 
     return (
@@ -89,7 +89,7 @@ class App extends Component {
           breakLabel={breakLabel}
           sessionLabel={sessionLabel}
           currentActive={currentActive}
-          time={currentActive === 'session' ? sessionLength : breakLength}
+          time={currentActive === "session" ? sessionLength : breakLength}
         />
         <Controls
           increment={this.increment}

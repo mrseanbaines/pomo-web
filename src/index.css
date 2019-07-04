@@ -4,11 +4,21 @@
   font-family: 'arciform';
   src: url('./assets/fonts/arciform.eot');
   src: url('./assets/fonts/arciform.eot?#iefix') format('embedded-opentype'),
-       url('./assets/fonts/arciform.woff2') format('woff2'),
-       url('./assets/fonts/arciform.woff') format('woff'),
-       url('./assets/fonts/arciform.ttf') format('truetype');
+    url('./assets/fonts/arciform.woff2') format('woff2'),
+    url('./assets/fonts/arciform.woff') format('woff'),
+    url('./assets/fonts/arciform.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+
+:root {
+  font-size: 90%;
+}
+
+@media (min-width: 768px) {
+  :root {
+    font-size: 100%;
+  }
 }
 
 html {
@@ -42,17 +52,17 @@ h6 {
 }
 
 h1 {
-  font-size: 72px;
+  font-size: 4.5rem;
 }
 
 h2 {
-  font-size: 48px;
+  font-size: 3rem;
 }
 
 h3 {
-  font-size: 36px;
+  font-size: 2rem;
 }
 
 h6 {
-  font-size: 20px;
+  font-size: 1.25rem;
 }

@@ -18,8 +18,13 @@ const SVG = styled.svg`
 
 const TimerWrapper = styled.div`
   position: relative;
-  width: 100%;
-  padding-bottom: 100%;
+  width: 90%;
+  padding-bottom: 90%;
+
+  @media (min-width: 768px) {
+    width: 90%;
+    padding-bottom: 90%;
+  }
 `;
 
 const TimerControl = styled.h6`

@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 
 const H6 = styled.h6`
   opacity: 0.4;
-`
+`;
 
 const H3 = styled.h3`
   ::after {
     content: " mins";
   }
-`
+`;
 
 const ControlIcon = styled.div`
-  font-size: 50px;
+  font-size: 40px;
   line-height: 0.5;
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
-`
+`;
 
 const ControlsWrapper = styled.div`
   width: 100%;
-`
+`;
 
 const ControlsWrapperInner = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-`
+`;
 
 class Controls extends Component {
   render() {
